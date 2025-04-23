@@ -1,0 +1,103 @@
+databaseChangeLog:
+    - changeSet:
+          id: 1
+          author: your_name
+          preConditions:
+              - onFail: MARK_RAN
+              - not:
+                    tableExists:
+                        tableName: point
+          changes:
+              - createTable:
+                    tableName: point
+                    columns:
+                        - column:
+                              name: id
+                              type: bigint
+                              autoIncrement: true
+                              constraints:
+                                  primaryKey: true
+                                  nullable: false
+                        - column:
+                              name: lat
+                              type: double
+                              constraints:
+                                  nullable: true
+                        - column:
+                              name: lon
+                              type: double
+                              constraints:
+                                  nullable: true
+    - changeSet:
+          id: 2
+          author: your_name
+          preConditions:
+              - onFail: MARK_RAN
+              - not:
+                    tableExists:
+                        tableName: path
+          changes:
+              - createTable:
+                    tableName: path
+                    columns:
+                        - column:
+                              name: id
+                              type: bigint
+                              autoIncrement: true
+                              constraints:
+                                  primaryKey: true
+                                  nullable: false
+                        - column:
+                              name: start_id
+                              type: bigint
+                              constraints:
+                                  nullable: false
+                                  foreignKeyName: fk_path_start_point
+                                  references: point(id)
+                        - column:
+                              name: end_id
+                              type: bigint
+                              constraints:
+                                  nullable: false
+                                  foreignKeyName: fk_path_end_point
+                                  references: point(id)
+                        - column:
+                              name: length
+                              type: double
+                              constraints:
+                                  nullable: false
+                        - column:
+                              name: time
+                              type: integer
+                              constraints:
+                                  nullable: false
+    - changeSet:
+          id: 3
+          author: your_name
+          preConditions:
+              - onFail: MARK_RAN
+              - not:
+                    foreignKeyConstraintExists:
+                        foreignKeyName: fk_path_start_point
+          changes:
+              - addForeignKeyConstraint:
+                    baseTableName: path
+                    baseColumnNames: start_id
+                    constraintName: fk_path_start_point
+                    referencedTableName: point
+                    referencedColumnNames: id
+    - changeSet:
+          id: 4
+          author: your_name
+          preConditions:
+              - onFail: MARK_RAN
+              - not:
+                    foreignKeyConstraintExists:
+                        foreignKeyName: fk_path_end_point
+          changes:
+              - addForeignKeyConstraint:
+                    baseTableName: path
+                    baseColumnNames: end_id
+                    constraintName: fk_path_end_point
+                    referencedTableName: point
+                    referencedColumnNames: id

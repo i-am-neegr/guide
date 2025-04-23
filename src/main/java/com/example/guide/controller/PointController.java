@@ -5,6 +5,7 @@ import com.example.guide.service.PointService;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +22,11 @@ public class PointController {
     @PostMapping("add")
     public ResponseEntity<Point> addPoint(@RequestBody Point point) {
         return ResponseEntity.ok(pointService.addPoint(point));
+    }
+
+    @PostMapping("add-list")
+    public ResponseEntity<List<Point>> addPoints(List<Point> points) {
+        return ResponseEntity.ok(pointService.addPoints(points));
     }
 
     @GetMapping("point-{id}")

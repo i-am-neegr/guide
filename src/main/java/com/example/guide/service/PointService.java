@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -18,6 +19,15 @@ public class PointService {
     public Point addPoint(Point point) {
         return pointRepository.save(point);
     }
+
+    public List<Point> addPoints(List<Point> points) {
+        List<Point> saved = new ArrayList<>();
+        for (Point point : points) {
+            saved.add(addPoint(point));
+        }
+        return saved;
+    }
+
 
     public Point getPointById(long id) {
         return pointRepository.findById(id).orElse(null);

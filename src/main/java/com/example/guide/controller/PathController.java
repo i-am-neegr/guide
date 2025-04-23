@@ -35,4 +35,9 @@ public class PathController {
     public ResponseEntity<List<Path>> getAllPoints() {
         return ResponseEntity.ok(pathService.getAllPaths());
     }
+
+    @DeleteMapping("path-{id}")
+    public void deletePoints(@PathVariable Long id) {
+        pathService.deletePathById(id);
+    }
 }
