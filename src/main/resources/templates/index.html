@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Виртуальный гид</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
+</head>
+<body>
+<div class="wrapper">
+    <h1>Добро пожаловать</h1>
+    <form method="post" action="/answer">
+        <div class="form-group">
+            <label for="start">Укажите пожалуйста начальную точку</label>
+            <div id="start-map" class="map"></div>
+            <input type="hidden" id="start" name="start">
+        </div>
+
+        <div class="form-group">
+            <label for="end">Укажите завершающую точку</label>
+            <div id="end-map" class="map"></div>
+            <input type="hidden" id="end" name="end">
+        </div>
+
+        <div class="form-group">
+            <label for="time">Укажите примерное время прогулки</label>
+            <input type="text" name="time" placeholder="Введите в формате 02:47" required>
+        </div>
+
+        <button type="submit" value="submit">Завершить создание</button>
+    </form>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+<script src="/map.js"></script>
+</body>
+</html>

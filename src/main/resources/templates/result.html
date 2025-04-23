@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Маршрут прогулки</title>
+    <link rel="stylesheet" href="/answer.css">
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=123083ff-7b2e-4438-ad1e-44d1f028c8df" type="text/javascript"></script>
+</head>
+<body>
+<div class="wrapper">
+    <div id="map" class="map"></div>
+    <a href="/" class="back-button">Вернуться</a>
+</div>
+
+<script th:inline="javascript">
+    function init() {
+        var path_position = /*[[${route}]]*/ [];
+
+        var multiRoute = new ymaps.multiRouter.MultiRoute({
+            referencePoints: path_position,
+            params: {
+                routingMode: 'pedestrian'
+            }
+        }, {
+            boundsAutoApply: true
+        });
+
+        var myMap = new ymaps.Map('map', {
+            center: [56.1505, 47.1993],
+            zoom: 12
+        }, {
+            buttonMaxWidth: 500
+        });
+
+        myMap.geoObjects.add(multiRoute);
+    }
+
+    ymaps.ready(init);
+</script>
+</body>
+</html>

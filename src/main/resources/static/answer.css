@@ -1,0 +1,41 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper {
+    flex: 1; /* Allow wrapper to take available space */
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    box-sizing: border-box;
+    height: 100%; /* Ensure wrapper fills height */
+}
+
+.map {
+    flex: 1; /* Map takes most of the space */
+    height: calc(100vh - 70px); /* Full height minus button space */
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+}
+
+.back-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.back-button:hover {
+    background-color: #218838;
+}
